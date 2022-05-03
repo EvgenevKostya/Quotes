@@ -6,23 +6,25 @@ const newQuoteBtn= document.getElementById('new-quote');
 const loader =document.getElementById('loader');
 
 //Show Loading
-function loading () {
+function showLoadingSpinner () {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
 // Hide Loading
-function complete() {
-    quoteContainer.hidden = false;
-    loader.hidden = true;
+function removeLoadingSpinner() {
+    if (!loader.hidden) {
+        quoteContainer.hidden = false;
+        loader.hidden = true;
+    }
 }
 
 
 
 //show new quote
 function newQuote() {
-    loading();
-// Pick a random quote from apiQuotes array
+    showLoadingSpinner();
+// Pick a random quote from quotes.js array
     const quote = localQuotes[Math.floor(Math.random() * localQuotes.length)]
 // Check if Auther field is blank  and replace it with 'Unknown'
     if (!quote.author) {
@@ -37,7 +39,7 @@ function newQuote() {
     quoteText.classList.remove('long-quote')
     }
     quoteText.textContent = quote.text;
-    complete();
+    removeLoadingSpinner();
 }
 
 //Tweet Quote
